@@ -3,12 +3,12 @@ import App from "./App.vue";
 import router from "./router/index";
 import store from './store/index';
 import config from "./config";
-import useVant from "./uiComponents/vant/index";
 import FastClick from 'fastclick'
-import api from './api/index';
+
 // 全局引入rem
 import './libs/rem';
-// import { httpJson, httpForm, httpMultipart } from "./libs/http";
+import useVant from "./uiComponents/vant/index";
+import { httpJson, httpForm, httpMultipart } from "./libs/http";
 import $cookie from "./storage/cookie";
 import $localStorage from "./storage/localStorage";
 import $sessionStorage from "./storage/sessionStorage";
@@ -26,8 +26,6 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-Vue.use(api)
-
 Vue.config.productionTip = false
 
 // Use mobile UI of Vant.
@@ -40,13 +38,13 @@ globalRegister(Vue);
 Vue.prototype.$config = config;
 
 // Global request method of params format is JSON.
-// Vue.prototype.$httpJson = httpJson;
+Vue.prototype.$httpJson = httpJson;
 
-// // Global request method of params format is FormData.
-// Vue.prototype.$httpForm = httpForm;
+// Global request method of params format is FormData.
+Vue.prototype.$httpForm = httpForm;
 
-// // Global request method of params format is multipart.
-// Vue.prototype.$httpMultipart = httpMultipart;
+// Global request method of params format is multipart.
+Vue.prototype.$httpMultipart = httpMultipart;
 
 // Global cookie method $cookie.
 Vue.prototype.$cookie = $cookie;
@@ -62,4 +60,3 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
-
